@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/routes_file.xsd">
+    <vType id="DEFAULT_VEHTYPE" length="7.5" maxSpeed="13.89" sigma="0.5" tau="1.0"/>
+    <vType id="bus" length="12.0" maxSpeed="13.89" sigma="0.5" tau="2.0" vClass="bus"/>
+    
+    <!-- 东进口 -->
+    <flow id="f_E2W_0" type="DEFAULT_VEHTYPE" from="E2W_0" to="S_out_0" begin="0" end="3600" vehsPerHour="225"/>
+    <flow id="f_E2W_1" type="DEFAULT_VEHTYPE" from="E2W_1" to="W_out_0" begin="0" end="3600" vehsPerHour="225"/>
+    <flow id="f_E2W_2" type="DEFAULT_VEHTYPE" from="E2W_2" to="W_out_1" begin="0" end="3600" vehsPerHour="225"/>
+    <flow id="f_E2W_3" type="DEFAULT_VEHTYPE" from="E2W_3" to="N_out_0" begin="0" end="3600" vehsPerHour="225"/>
+    <flow id="f_E2W_4" type="DEFAULT_VEHTYPE" from="E2W_4" to="N_out_1" begin="0" end="3600" vehsPerHour="225"/>
+    <flow id="f_E2W_5" type="bus" from="E2W_5" to="N_out_2" begin="0" end="3600" vehsPerHour="150"/>
+    
+    <!-- 西进口 -->
+    <flow id="f_W2E_0" type="DEFAULT_VEHTYPE" from="W2E_0" to="N_out_3" begin="0" end="3600" vehsPerHour="600"/>
+    <flow id="f_W2E_1" type="DEFAULT_VEHTYPE" from="W2E_1" to="E_out_0" begin="0" end="3600" vehsPerHour="600"/>
+    <flow id="f_W2E_2" type="DEFAULT_VEHTYPE" from="W2E_2" to="E_out_1" begin="0" end="3600" vehsPerHour="600"/>
+    <flow id="f_W2E_3" type="DEFAULT_VEHTYPE" from="W2E_3" to="E_out_2" begin="0" end="3600" vehsPerHour="600"/>
+    <flow id="f_W2E_4" type="DEFAULT_VEHTYPE" from="W2E_4" to="E_out_3" begin="0" end="3600" vehsPerHour="600"/>
+    <flow id="f_W2E_5" type="DEFAULT_VEHTYPE" from="W2E_5" to="E_out_4" begin="0" end="3600" vehsPerHour="600"/>
+    <flow id="f_W2E_6" type="DEFAULT_VEHTYPE" from="W2E_6" to="S_out_1" begin="0" end="3600" vehsPerHour="600"/>
+    <flow id="f_W2E_7" type="bus" from="W2E_7" to="S_out_2" begin="0" end="3600" vehsPerHour="150"/>
+    <flow id="f_W2E_8" type="bus" from="W2E_8" to="S_out_3" begin="0" end="3600" vehsPerHour="150"/>
+    
+    <!-- 北进口 -->
+    <flow id="f_N2S_0" type="DEFAULT_VEHTYPE" from="N2S_0" to="E_out_5" begin="0" end="3600" vehsPerHour="450"/>
+    <flow id="f_N2S_1" type="DEFAULT_VEHTYPE" from="N2S_1" to="S_out_4" begin="0" end="3600" vehsPerHour="450"/>
+    <flow id="f_N2S_2" type="DEFAULT_VEHTYPE" from="N2S_2" to="S_out_5" begin="0" end="3600" vehsPerHour="450"/>
+    <flow id="f_N2S_3" type="DEFAULT_VEHTYPE" from="N2S_3" to="S_out_6" begin="0" end="3600" vehsPerHour="450"/>
+    <flow id="f_N2S_4" type="DEFAULT_VEHTYPE" from="N2S_4" to="W_out_2" begin="0" end="3600" vehsPerHour="450"/>
+    <flow id="f_N2S_5" type="DEFAULT_VEHTYPE" from="N2S_5" to="W_out_3" begin="0" end="3600" vehsPerHour="450"/>
+    
+    <!-- 南进口 -->
+    <flow id="f_S2N_0" type="DEFAULT_VEHTYPE" from="S2N_0" to="W_out_4" begin="0" end="3600" vehsPerHour="425"/>
+    <flow id="f_S2N_1" type="DEFAULT_VEHTYPE" from="S2N_1" to="N_out_4" begin="0" end="3600" vehsPerHour="425"/>
+    <flow id="f_S2N_2" type="DEFAULT_VEHTYPE" from="S2N_2" to="N_out_5" begin="0" end="3600" vehsPerHour="425"/>
+    <flow id="f_S2N_3" type="DEFAULT_VEHTYPE" from="S2N_3" to="N_out_6" begin="0" end="3600" vehsPerHour="425"/>
+    <flow id="f_S2N_4" type="DEFAULT_VEHTYPE" from="S2N_4" to="E_out_6" begin="0" end="3600" vehsPerHour="425"/>
+</routes>
