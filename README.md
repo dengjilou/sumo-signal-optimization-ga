@@ -1,105 +1,63 @@
-# SUMO Signal Timing Optimization (Genetic Algorithm)
+# SUMO Signal Timing Optimization
 
-## Project Overview
+A reproducible signal timing experiment for the simplified Changjiang Middle
+Road–Huizhou Avenue intersection in Hefei. The model uses the repository's
+SUMO network and demand files. The scripts run independent SUMO simulations
+to compare green time allocations at intersection J1.
 
-Urban intersection signal timing optimization using Genetic Algorithm (GA) combined with SUMO microscopic traffic simulation. Case study: Changjiang Middle Road, Hefei.
+## Run in SUMO GUI
 
-## Tech Stack
+Tested with SUMO 1.18.0. Run from the repository root with the SUMO binaries on
+your PATH:
 
-- **Simulation**: SUMO 1.18.0 + TraCI
-- **Language**: Python 3.8+
-- **Optimization**: Custom Genetic Algorithm
-- **Visualization**: matplotlib, pandas
-- **AI Integration**: ZhipuAI scene generation
+~~~powershell
+sumo-gui -c config/changjiang.sumocfg --start --delay 110
+~~~
 
-## Project Structure
+The default configuration loads the optimized program. To see the equal
+split, add `--additional-files config/signal_equal.add.xml` to the command.
 
-```
-sumo-signal-optimization-ga/
-+-- src/                    # Source code
-|   +-- ga_optimizer.py     # GA optimization main program
-|   +-- benchmark.py        # Benchmark comparison script
-|   +-- analyze_tripinfo.py # Trip information analysis
-+-- config/                 # SUMO configuration
-|   +-- changjiang.net.xml  # Road network (6360 lines)
-|   +-- changjiang.sumocfg  # SUMO config file
-|   +-- changjiang_official.net.xml  # Official signal timing
-|   +-- changjiang_optimized.net.xml # GA optimized timing
-|   +-- routes_final.rou.xml         # Original traffic flow
-|   +-- routes_5x.rou.xml            # 5x traffic flow
-+-- tests/                  # Unit tests
-|   +-- test_sumo_connection.py
-+-- docs/                   # Documentation & charts
-|   +-- convergence_curve.png
-|   +-- flow_capacity.png
-|   +-- gaode_validation.png
-|   +-- signal_timing.png
-+-- results/                # Runtime output (gitignored)
-```
+## Reproduce the search and comparison
 
-## Quick Start
+Use Python 3.9+ and SUMO 1.18.0. The two scripts use the Python standard
+library. Set `SUMO_HOME` to the installation directory or put `sumo` on PATH.
 
-### Prerequisites
+~~~powershell
+python src/ga_optimizer.py
+python src/benchmark.py
+~~~
 
-- SUMO 1.18.0
-- Python 3.8+
-- SUMO tools in PATH
+The search uses a fixed seed and a fresh simulation for each distinct
+candidate. It evaluates 1x demand with seed 42 and writes both signal programs
+into `config/`. The benchmark compares them at 1x for 3,600 seconds with
+seeds 42 and 43, and at 5x for 1,800 seconds with seed 42. Each pair uses the
+same network, demand, seed, and horizon.
 
-### Setup
+Both programs release one approach at a time. They use a 120-second cycle,
+with 3 seconds of amber and 1 second of all-red after each approach. Green
+times in east, west, north and south approach order are 26/26/26/26 seconds
+for the equal split and 26/33/31/14 seconds for the selected split. The search
+ranks candidates by collisions and teleports, vehicles waiting to depart,
+mean time loss plus mean departure delay, then completed trips.
 
-```bash
-pip install -r requirements.txt
-```
+| Demand and seed | Mean time loss, equal to optimized | Completed trips, equal to optimized |
+| --- | --- | --- |
+| 1x, seed 42 | 43.535 s to 38.918 s | 2,095 to 2,093 |
+| 1x, seed 43 | 43.530 s to 38.883 s | 2,095 to 2,095 |
+| 5x, seed 42 | 95.197 s to 92.894 s | 3,610 to 3,685 |
 
-### Run GA Optimization
+In the 5x run, vehicles still waiting to depart at the cutoff decreased
+from 1,426 to 1,349. All six runs recorded zero collisions and teleports.
+See the [reference comparison](docs/benchmark_reference.json) for the output.
+Means include vehicles already inserted but still on the road at the cutoff.
+The report also counts completed trips, vehicles still on the road, and
+vehicles waiting to depart, which matters under heavy demand.
 
-```bash
-cd src
-python ga_optimizer.py
-```
-
-### Run Benchmark Comparison
-
-```bash
-cd src
-python benchmark.py
-```
-
-## Core Features
-
-### Genetic Algorithm
-- **Encoding**: Phase timing parameters
-- **Fitness**: Average delay + queue length
-- **Selection**: Tournament selection
-- **Crossover**: Single-point crossover
-- **Mutation**: Gaussian mutation
-
-### Road Network
-- **Location**: Changjiang Middle Road, Hefei
-- **Size**: 6360 lines of NET XML
-- **Signal**: 4-phase control plan
-- **Lanes**: Multi-lane arterial road
-
-### Results
-- **Optimization**: +5s north-south through phase
-- **Capacity**: >= 50000 pcu/h
-- **Test scenarios**: 1x - 6x traffic flow multipliers
-
-## Documentation
-
-- [Convergence Curve](docs/convergence_curve.png)
-- [Flow Capacity](docs/flow_capacity.png)
-- [GAODE Validation](docs/gaode_validation.png)
-- [Signal Timing](docs/signal_timing.png)
-
-## TODO
-
-- [ ] Add more intersection case studies
-- [ ] Implement adaptive signal control
-- [ ] Add reinforcement learning baseline
-- [ ] Add CI/CD pipeline
-- [ ] Document GA parameter tuning methodology
+The network is a schematic model. Its inherited J1 junction has no
+right-of-way conflict matrix. The approach programs and measurements describe
+this simulation experiment. The earlier network variants remain available
+for reference.
 
 ## License
 
-MIT License
+MIT

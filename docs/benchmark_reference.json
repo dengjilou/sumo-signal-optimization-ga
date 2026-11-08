@@ -1,0 +1,68 @@
+{
+  "1x_seed42_equal": {
+    "duration_s": 3600,
+    "arrived": 2095,
+    "running": 25,
+    "pending_departure": 0,
+    "collisions": 0,
+    "teleports": 0,
+    "mean_wait_s": 34.534,
+    "mean_time_loss_s": 43.535,
+    "mean_depart_delay_s": 0.245
+  },
+  "1x_seed42_optimized": {
+    "duration_s": 3600,
+    "arrived": 2093,
+    "running": 27,
+    "pending_departure": 0,
+    "collisions": 0,
+    "teleports": 0,
+    "mean_wait_s": 30.263,
+    "mean_time_loss_s": 38.918,
+    "mean_depart_delay_s": 0.49
+  },
+  "1x_seed43_equal": {
+    "duration_s": 3600,
+    "arrived": 2095,
+    "running": 25,
+    "pending_departure": 0,
+    "collisions": 0,
+    "teleports": 0,
+    "mean_wait_s": 34.541,
+    "mean_time_loss_s": 43.53,
+    "mean_depart_delay_s": 0.196
+  },
+  "1x_seed43_optimized": {
+    "duration_s": 3600,
+    "arrived": 2095,
+    "running": 25,
+    "pending_departure": 0,
+    "collisions": 0,
+    "teleports": 0,
+    "mean_wait_s": 30.228,
+    "mean_time_loss_s": 38.883,
+    "mean_depart_delay_s": 0.536
+  },
+  "5x_seed42_equal": {
+    "duration_s": 1800,
+    "arrived": 3610,
+    "running": 269,
+    "pending_departure": 1426,
+    "collisions": 0,
+    "teleports": 0,
+    "mean_wait_s": 79.975,
+    "mean_time_loss_s": 95.197,
+    "mean_depart_delay_s": 184.704
+  },
+  "5x_seed42_optimized": {
+    "duration_s": 1800,
+    "arrived": 3685,
+    "running": 271,
+    "pending_departure": 1349,
+    "collisions": 0,
+    "teleports": 0,
+    "mean_wait_s": 77.682,
+    "mean_time_loss_s": 92.894,
+    "mean_depart_delay_s": 159.755
+  }
+}

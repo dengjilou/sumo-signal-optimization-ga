@@ -2,7 +2,8 @@
 <configuration>
     <input>
         <net-file value="changjiang.net.xml"/>
-        <route-files value="routes_final_fixed.rou.xml"/>
+        <route-files value="routes_final.rou.xml"/>
+        <additional-files value="signal_optimized.add.xml"/>
     </input>
     <time>
         <begin value="0"/>
